@@ -1,0 +1,7 @@
+export const ADD_TODO = "ADD_TODO";
+export const DELETE_TODO = "DELETE_TODO";
+export const COMPLETED_TODO = "COMPLETED_TODO";
+export const EDIT_TODO = "EDIT_TODO";
+export const SELECTED_ITEMS = "SELECTED_ITEMS";
+export const DELETE_SELECTED = "DELETE_SELECTED";
+export const SET_TO_LOCAL_STORAGE = "SET_TO_LOCAL_STORAGE";

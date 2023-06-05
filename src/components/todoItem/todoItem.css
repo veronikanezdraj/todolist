@@ -1,0 +1,118 @@
+.task-container {
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #939697;
+  cursor: pointer;
+  background-color: #aad5dd;
+  height: 50px;
+  margin: 15px;
+  padding: 5px 10px;
+  display: flex;
+}
+.task-container button {
+  visibility: hidden;
+  background-color: #9fb4fa;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+  width: 65px;
+  border-radius: 5px;
+}
+.task-container:hover button {
+  visibility: visible;
+  background-color: #9fb4fa;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+  width: 65px;
+  border-radius: 5px;
+}
+/* .task  */
+.span {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+}
+.time {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 100;
+  color: #727678;
+}
+.taskCompleted span {
+  text-decoration: line-through;
+}
+.taskCompleted {
+  background-color: #d8d9dd;
+  border-color: #d8d9dd;
+}
+
+.taskEdit {
+  cursor: default;
+  color: aquamarine;
+}
+
+.none {
+  visibility: hidden;
+}
+
+/* .task:hover + .button {
+  display: inline-block;
+  background-color: #1840c5;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+  width: 65px;
+  border-radius: 5px;
+} */
+/* .task button:hover {
+  background-color: #1840c5;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+  width: 65px;
+  border-radius: 5px;
+} */ /* .taskDelete button {
+  visibility: visible;
+  background-color: #6583e5;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+  width: 65px;
+  border-radius: 5px;
+} */
+/* .task button:hover {
+  display: inline-block;
+  background-color: #6583e5;
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  height: 100%;
+  width: 65px;
+  border-radius: 5px;
+} */
+/* .task {
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #939697;
+  cursor: pointer;
+  background-color: #b5e3eb;
+  height: 50px;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  padding: 5px 10px;
+  display: flex;
+} */
