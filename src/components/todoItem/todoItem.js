@@ -1,9 +1,40 @@
 import { useDispatch } from "react-redux";
 import { Button } from "../button/button";
-import { selectedItems, deleteTodo } from "../../store/actions/todosActions";
-import "./todoItem.css";
-import cn from "classnames";
+import {
+  selectedItems,
+  deleteTodo,
+} from "../../store/localStorageRedux/actions/todosActions";
 import dayjs from "dayjs";
+import styled from "styled-components";
+const StyledLi = styled.li`
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #939697;
+  cursor: pointer;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: #aad5dd;
+  height: 60px;
+  margin: 10px;
+  padding: 5px 10px;
+  display: flex;
+`;
+const StyledSelectedItem = styled.li`
+  border-radius: 5px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #939697;
+  cursor: pointer;
+
+  background-color: pink;
+  height: 60px;
+  width: 100%;
+
+  padding: 5px 10px;
+  display: flex;
+`;
 const TodoItem = ({
   id,
   selected,
@@ -15,7 +46,7 @@ const TodoItem = ({
   const dispatch = useDispatch();
 
   return (
-    <ul className={cn("task-container", { taskCompleted: completed })}>
+    <StyledLi>
       {!completed ? (
         <>
           <input
@@ -23,29 +54,28 @@ const TodoItem = ({
             checked={selected}
             onChange={() => dispatch(selectedItems(id))}
           />
-          <span className="span">{text}</span>
-
-          <time className="time" dateTime={date}>
+          <span>{text}</span>
+          <time dateTime={date}>
             {dayjs(date).format("dddd, D  MMMM  YYYY mm:ss")}
           </time>
           <Button onClick={clickOnEditButton}>edit</Button>
         </>
       ) : (
-        <>
+        <StyledSelectedItem>
           <input
-            className="none"
             type="checkbox"
             checked={selected}
             onChange={() => dispatch(selectedItems(id))}
           />
-          <span className="span">{text}</span>
-          <time className="time" dateTime={date}>
+          <span>{text}</span>
+
+          <time dateTime={date}>
             {dayjs(date).format("dddd, D  MMMM  YYYY mm:ss")}
           </time>
           <Button onClick={() => dispatch(deleteTodo(id))}>delete</Button>
-        </>
+        </StyledSelectedItem>
       )}
-    </ul>
+    </StyledLi>
   );
 };
 

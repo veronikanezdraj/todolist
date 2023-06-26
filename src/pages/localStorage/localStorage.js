@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import "./local_Storage.css";
+import styled from "styled-components";
 import InputField from "../../components/inputField/inputField";
 import TodoList from "../../components/todoList/todoList";
 import { useState } from "react";
@@ -8,10 +8,29 @@ import {
   editTodo,
   completeTodo,
   deleteSelected,
-} from "../../store/actions/todosActions";
+} from "../../store/localStorageRedux/actions/todosActions";
 import { Button } from "../../components/button/button";
 import { useSelector } from "react-redux";
 
+const StyledWraper = styled.div`
+  width: 90%;
+  top: 50%;
+  left: 50%;
+  background: rgb(115, 185, 194);
+  border-radius: 10px;
+  min-width: 450px;
+  position: absolute;
+  min-height: 500px;
+  transform: translate(-50%, -50%);
+`;
+const StyledSelected = styled.div`
+  align-items: center;
+  cursor: pointer;
+  height: 60px;
+  margin-left: 50px;
+  padding: 5px 10px;
+  display: flex;
+`;
 const LocalStorage = () => {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
@@ -31,19 +50,18 @@ const LocalStorage = () => {
   };
 
   return (
-    <>
+    <StyledWraper>
       {selectedTodos.length > 0 && (
-        <div className="selected">
+        <StyledSelected>
           <Button onClick={() => dispatch(completeTodo())}>
             completed ({selectedTodos.length})
           </Button>
           <Button onClick={() => dispatch(deleteSelected())}>
             delete ({selectedTodos.length})
           </Button>
-        </div>
+        </StyledSelected>
       )}
-      <div className="container ">
-        <h2 className="header">TO DO LIST</h2>
+      <div>
         <InputField
           selectedToEditItem={selectedToEditItem}
           setSelectedToEditItem={setSelectedToEditItem}
@@ -54,7 +72,7 @@ const LocalStorage = () => {
         />
         <TodoList setSelectedToEditItem={setSelectedToEditItem} />
       </div>
-    </>
+    </StyledWraper>
   );
 };
 export default LocalStorage;

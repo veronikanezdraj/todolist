@@ -1,0 +1,6 @@
+.selected {
+  visibility: visible;
+}
+.nonSelected {
+  visibility: hidden;
+}

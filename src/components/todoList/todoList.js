@@ -1,9 +1,8 @@
 import { useSelector } from "react-redux";
 import TodoItem from "../todoItem/todoItem";
 import { useEffect } from "react";
-import "./todoList.css";
 import { useDispatch } from "react-redux";
-import { setTodosToLocalStorage } from "../../store/actions/todosActions";
+import { setTodosToLocalStorage } from "../../store/localStorageRedux/actions/todosActions";
 const TodoList = ({ setSelectedToEditItem }) => {
   const todos = useSelector((state) => state.todoReducers.todos);
   const selectedTodos = useSelector((state) => state.todoReducers.selected);
@@ -25,7 +24,7 @@ const TodoList = ({ setSelectedToEditItem }) => {
   }, [dispatch]);
 
   return (
-    <ul className="ul">
+    <ul>
       {todos
         ?.sort((a, b) => (a.date > b.date ? -1 : 1))
         .sort((a, b) => (a.completed < b.completed ? -1 : 1))
