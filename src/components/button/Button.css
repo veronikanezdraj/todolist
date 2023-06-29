@@ -14,6 +14,7 @@ button {
   -webkit-transition: all 0.2s ease-in;
   -moz-transition: all 0.2s ease-in;
   transition: all 0.2s ease-in;
+  margin: 10px;
 }
 
 button:hover {

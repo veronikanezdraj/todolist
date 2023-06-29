@@ -1,13 +1,13 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   border: none;
   padding: 15px;
-  width: 15%;
+  width: 100%;
   height: 4vh;
   position: sticky;
   top: 0;
-  background: rgb(238, 174, 202);
+  font-size: large;
   background: radial-gradient(
     circle,
     rgba(238, 174, 202, 1) 0%,

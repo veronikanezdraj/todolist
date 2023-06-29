@@ -62,6 +62,7 @@ export const createPost = (text, completed) => {
       .post("http://localhost:3000/posts/", {
         text,
         completed,
+        selected: false,
       })
       .then((response) => {
         dispatch(createPostsSuccess(response.data.post));
@@ -147,55 +148,116 @@ export const deletePost = (postId) => {
   };
 };
 
-export const deleteSelected = () => ({
-  type: actionTypes.DELETE_SELECTED,
-});
+export const selectedPostStart = () => {
+  return {
+    type: actionTypes.SELECTED_POST_START,
+  };
+};
 
-// export const deleteSelectedStart = () => {
-//   return {
-//     type: actionTypes.DELETE_SELECTED_START,
-//   };
-// };
+export const selectedPostSuccess = (result) => {
+  console.log(result);
+  return {
+    type: actionTypes.SELECTED_POST_SUCCESS,
+    payload: result,
+  };
+};
 
-// export const deleteSelectedSuccess = (postId) => {
-//   console.log(postId);
-//   return {
-//     type: actionTypes.DELETE_SELECTED_SUCCESS,
-//     payload: postId,
-//   };
-// };
-// export const deleteSelectedFail = (error) => {
-//   return {
-//     type: actionTypes.DELETE_SELECTED_FAIL,
-//     payload: error,
-//   };
-// };
+export const selectedPostFail = (error) => {
+  return {
+    type: actionTypes.SELECTED_POST_FAIL,
+    payload: error,
+  };
+};
 
-// export const deleteSelected = (postId) => {
-//   return (dispatch) => {
-//     dispatch(deleteSelectedStart());
-//     axios
-//       .delete(`http://localhost:3000/posts/${postId}`)
-//       .then((response) => {
-//         dispatch(deleteSelectedSuccess(response.data.post));
-//         console.log(response.data.post);
-//       })
-//       .catch((error) => {
-//         dispatch(deleteSelectedFail(error.message));
-//       });
-//   };
-// };
+export const selectedPost = (postId) => {
+  return (dispatch) => {
+    dispatch(selectedPostStart);
+    axios
+      .put(`http://localhost:3000/posts/selected/${postId}`, { selected: true })
+      .then((response) => {
+        dispatch(selectedPostSuccess(response.data.result));
+        console.log(response);
+      })
+      .catch((error) => {
+        dispatch(selectedPostFail(error));
+      });
+  };
+};
 
-export const selectedPost = (id) => ({
-  type: actionTypes.SELECTED_POST,
-  payload: id,
-});
+export const deleteSelectedStart = () => {
+  return {
+    type: actionTypes.DELETE_SELECTED_START,
+  };
+};
 
-export const completePost = (id) => ({
-  type: actionTypes.COMPLETED_POST,
-  payload: id,
-});
+export const deleteSelectedSuccess = (postId) => {
+  console.log(postId);
+  return {
+    type: actionTypes.DELETE_SELECTED_SUCCESS,
+    payload: postId,
+  };
+};
+export const deleteSelectedFail = (error) => {
+  return {
+    type: actionTypes.DELETE_SELECTED_FAIL,
+    payload: error,
+  };
+};
 
+export const deleteSelected = (postId) => {
+  return (dispatch) => {
+    dispatch(deleteSelectedStart());
+    axios
+      .delete(`http://localhost:3000/posts/${postId}`)
+      .then((response) => {
+        dispatch(deleteSelectedSuccess(response.data.post));
+        console.log(response.data.post);
+      })
+      .catch((error) => {
+        dispatch(deleteSelectedFail(error.message));
+      });
+  };
+};
+
+export const completedPostStart = () => {
+  return {
+    type: actionTypes.COMPLETED_POST_START,
+  };
+};
+
+export const completedPostSuccess = (result) => {
+  console.log(result);
+  return {
+    type: actionTypes.COMPLETED_POST_SUCCESS,
+    payload: result,
+  };
+};
+
+export const completedPostFail = () => {
+  return {
+    type: actionTypes.COMPLETED_POST_FAIL,
+  };
+};
+
+export const completedPost = () => {
+  return (dispatch) => {
+    dispatch(completedPostStart());
+    axios
+      .get("http://localhost:3000/posts/complete")
+      .then((response) => {
+        dispatch(completedPostSuccess(response.data.result));
+        console.log(response);
+      })
+      .catch((error) => {
+        dispatch(putPostsFail(error.message));
+      });
+  };
+};
+
+// export const selectedPost = (id) => ({
+//   type: actionTypes.SELECTED_POST,
+//   payload: id,
+// });
 // export const setPostsToLocalStorage = (posts) => ({
 //   type: actionTypes.SET_TO_LOCAL_STORAGE,
 //   payload: posts,
@@ -221,3 +283,7 @@ export const completePost = (id) => ({
 //     });
 //   };
 // };
+
+// export const deleteSelected = () => ({
+//   type: actionTypes.DELETE_SELECTED,
+// });

@@ -8,16 +8,18 @@ import {
   getPosts,
   createPost,
   updatePost,
-  completePost,
+  completedPost,
   deleteSelected,
 } from "../../store/apishkaRedux/actions/postsActions";
 import PostsList from "../../components/todoList/postsList ";
-import classNames from "classnames";
+
+// import classNames from "classnames";
 const Apishka = () => {
   const [text, setText] = useState("");
   const dispatch = useDispatch();
   const [selectedToEditItem, setSelectedToEditItem] = useState(null);
-  const selectedPost = useSelector((state) => state.postsReducer.selected);
+
+  const postsArr = useSelector((state) => state.postsReducer.posts);
 
   useEffect(() => {
     dispatch(getPosts());
@@ -35,27 +37,17 @@ const Apishka = () => {
     }
   };
 
+  const selectedPosts = postsArr.filter((post) => post.selected);
+
   return (
     <>
-      {selectedPost.length > 0 ? (
-        <div className="selected">
-          <Button onClick={() => dispatch(completePost())}>
-            completed ({selectedPost.length})
+      {selectedPosts.length > 0 && (
+        <div>
+          <Button onClick={() => dispatch(completedPost())}>
+            completed ({selectedPosts.length})
           </Button>
           <Button onClick={() => dispatch(deleteSelected())}>
-            delete ({selectedPost.length})
-          </Button>
-        </div>
-      ) : (
-        <div className="nonSelected">
-          <Button
-            className="completed"
-            onClick={() => dispatch(completePost())}
-          >
-            completed ({selectedPost.length})
-          </Button>
-          <Button onClick={() => dispatch(deleteSelected())}>
-            delete ({selectedPost.length})
+            delete ({selectedPosts.length})
           </Button>
         </div>
       )}
@@ -77,3 +69,21 @@ export default Apishka;
 /* <ul className={cn("task", { taskCompleted: completed })}>  */
 // taskCompleted - is css class
 // completed - is field in object
+
+// : (
+//   <div className="nonSelected">
+//     <Button
+//       className="completed"
+//       onClick={() => dispatch(completePost())}
+//     >
+//       completed ({selectedPost.length})
+//     </Button>
+//     <Button onClick={() => dispatch(deleteSelected())}>
+//       delete ({selectedPost.length})
+//     </Button>
+//   </div>
+// )}
+
+// className={classNames("selected", {
+//   nonSelected: selectedPost.length === 0,
+// })}
